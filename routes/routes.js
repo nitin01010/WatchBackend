@@ -1,25 +1,18 @@
 const express = require("express");
+const WatchModel = require("../db/db");
 const router = express.Router();
 
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
     try {
-        res.status(200).send('Hello World!');
+        const data = await WatchModel.find({});
+        console.log(data);
+        res.status(200).send(data);
     } catch (error) {
         res.status(401).send('There is One error ');
     }
 });
-
-
-router.get('/api/:id', (req, res) => {
-    try {
-        console.log(req.params);
-        res.status(200).send('Hello World!');
-    } catch (error) {
-        res.status(401).send('There is One error ');
-    }
-});
-
-
 
 module.exports = router
+
+
